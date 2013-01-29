@@ -18,4 +18,6 @@
 - (UIImage *) croppedToRect:(CGRect)rect;
 - (UIImage *) scaledToSize:(CGSize)newSize opaque:(BOOL)opaque;
 
++ (UIImage *)imageFromLayer:(CALayer *)layer;
+
 @end

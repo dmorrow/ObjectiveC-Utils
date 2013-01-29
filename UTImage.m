@@ -70,7 +70,8 @@
 
 + (UIImage *) circleWithRect:(CGRect)rect withFill:(UIColor*)fillColor
 {
-    UIGraphicsBeginImageContextWithOptions(rect.size, FALSE, 0);
+    CGSize size = CGSizeMake(rect.size.width+2*rect.origin.x, rect.size.height+2*rect.origin.y);
+    UIGraphicsBeginImageContextWithOptions(size, FALSE, 0);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextAddEllipseInRect(ctx, rect);
     CGContextSetFillColorWithColor(ctx, fillColor.CGColor);

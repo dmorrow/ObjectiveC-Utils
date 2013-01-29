@@ -146,24 +146,11 @@
 - (UIImage *) croppedToRect:(CGRect)rect
 {
     UIImage *ret = nil;
-    
-    // This calculates the crop area.
-    /*
-    float originalWidth  = original.size.width;
-    float originalHeight = original.size.height;
-    
-    float edge = fminf(originalWidth, originalHeight);
-    
-    float posX = (originalWidth   - edge) / 2.0f;
-    float posY = (originalHeight  - edge) / 2.0f;
-    
-    */
     CGRect cropRect;
     // This performs the image cropping.
     if(self.imageOrientation == UIImageOrientationLeft || self.imageOrientation == UIImageOrientationRight)
     {
         cropRect = CGRectMake(rect.origin.y, rect.origin.x, rect.size.height, rect.size.width);
-        
     }
     else
     {
@@ -188,6 +175,18 @@
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
+}
+
++ (UIImage *)imageFromLayer:(CALayer *)layer
+{
+    UIGraphicsBeginImageContext([layer frame].size);
+    
+    [layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return outputImage;
 }
 
 @end
