@@ -13,30 +13,22 @@
 
 - (NSDictionary *) urlParameterValues
 {
-	NSArray* splitOnQuery = [self componentsSeparatedByString:@"?"];
 	NSMutableDictionary* returnDict = [NSMutableDictionary dictionary];
-	if ([splitOnQuery count] == 2)
-	{
-		NSString* queryVal = [splitOnQuery objectAtIndex:1];
-		NSArray* nameValuePairs = [queryVal componentsSeparatedByString:@"&"];
-		if ([nameValuePairs count] > 0)
-		{
-			for (NSString* pair in nameValuePairs)
-			{
-				NSArray* splitPair = [pair componentsSeparatedByString:@"="];
-				if ([splitPair count] == 2)
-				{
-					[returnDict setObject:[[splitPair objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] 
-								   forKey:[[splitPair objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-				}
-			}
-		}
-	}
-	DLog(@"%@", returnDict);
-	return ([returnDict count] > 0) ? returnDict : nil;
-					 
-					 
-					 
+
+    NSArray* nameValuePairs = [self componentsSeparatedByString:@"&"];
+    if ([nameValuePairs count] > 0)
+    {
+        for (NSString* pair in nameValuePairs)
+        {
+            NSArray* splitPair = [pair componentsSeparatedByString:@"="];
+            if ([splitPair count] == 2)
+            {
+                [returnDict setObject:[[splitPair objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] 
+                               forKey:[[splitPair objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            }
+        }
+    }
+	return ([returnDict count] > 0) ? [NSDictionary dictionaryWithDictionary:returnDict] : nil;
 }
 
 - (BOOL) validateEmail
