@@ -44,9 +44,17 @@
 
 + (NSString*) path2x:(NSString*)path
 {
-	return [[path stringByDeletingLastPathComponent] 
-			stringByAppendingPathComponent:[NSString stringWithFormat:@"%@@2x.%@", 
-											[[path lastPathComponent] stringByDeletingPathExtension], 
+    NSString* ipadLabel = @"";
+    if ([path rangeOfString:@"~ipad"].location != NSNotFound)
+    {
+        NSRange lastOccurance = [path rangeOfString:@"~ipad" options:NSBackwardsSearch];
+        ipadLabel = @"~ipad";
+        path = [path stringByReplacingCharactersInRange:lastOccurance withString:@""];
+    }
+	return [[path stringByDeletingLastPathComponent]
+			stringByAppendingPathComponent:[NSString stringWithFormat:@"%@@2x%@.%@", 
+											[[path lastPathComponent] stringByDeletingPathExtension],
+                                            ipadLabel,
 											[path pathExtension]]];
 	
 }
