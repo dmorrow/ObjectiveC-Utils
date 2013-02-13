@@ -44,6 +44,7 @@
 
 + (NSString*) path2x:(NSString*)path
 {
+    if ([path rangeOfString:@"@2x"].location != NSNotFound) return path;
     NSString* ipadLabel = @"";
     if ([path rangeOfString:@"~ipad"].location != NSNotFound)
     {
