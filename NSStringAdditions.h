@@ -14,5 +14,6 @@
 - (NSDictionary *) urlParameterValues;
 - (BOOL) validateEmail;
 - (NSString*)md5HexDigest;
+- (NSString *)unformattedPhoneNumber;
 
 @end
