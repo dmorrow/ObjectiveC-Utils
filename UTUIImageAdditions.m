@@ -132,6 +132,7 @@
 	// image is retained by the property setting above, so we can 
 	// release the original
 	CGImageRelease(mainViewContentBitmapContext);
+    CGContextRelease(context);
 	
 	// return the image
 	return theImage;
