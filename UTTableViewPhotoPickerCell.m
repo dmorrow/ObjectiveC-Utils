@@ -94,8 +94,8 @@
 	_photoPicker = [[UIImagePickerController alloc] init];
 	_photoPicker.delegate = self;
 	_photoPicker.sourceType = type;
-
-	[[self viewController] presentModalViewController:_photoPicker animated:TRUE];
+    
+	[[self viewController] presentViewController:_photoPicker animated:TRUE completion:nil];
 }
 
 - (void) updateText
@@ -154,7 +154,7 @@
 	{
 		[self.delegate cellDidEndEditting:self];
 	}
-	[[self viewController] dismissModalViewControllerAnimated:TRUE];
+	[[self viewController] dismissViewControllerAnimated:TRUE completion:nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -163,7 +163,7 @@
 	{
 		[self.delegate cellDidEndEditting:self];
 	}
-	[[self viewController] dismissModalViewControllerAnimated:TRUE];
+	[[self viewController] dismissViewControllerAnimated:TRUE completion:nil];
 }
 
 

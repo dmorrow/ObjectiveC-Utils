@@ -33,7 +33,7 @@
 	if ((f != nil) && (self = [super initWithFrame:CGRectMake(xPos, yPos, (w>0) ? w : 1, 1)]))
 	{
 		self.numberOfLines = 0;
-		self.lineBreakMode = UILineBreakModeWordWrap;
+		self.lineBreakMode = NSLineBreakByWordWrapping;
 		_textBlock = (w>0);
 		self.font = f;
 		self.text = t;

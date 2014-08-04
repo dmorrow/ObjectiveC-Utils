@@ -49,17 +49,12 @@
     }
     UIInterfaceOrientation orientation = [referenceViewController interfaceOrientation];
     
-    if ([referenceViewController respondsToSelector:@selector(supportedInterfaceOrientations)])
+    UIInterfaceOrientationMask orientationMask = [[UIApplication sharedApplication] supportedInterfaceOrientationsForWindow:_previousKeyWindow];
+    if (referenceViewController.supportedInterfaceOrientations & orientationMask)
     {
-        UIInterfaceOrientationMask orientationMask = [[UIApplication sharedApplication] supportedInterfaceOrientationsForWindow:_previousKeyWindow];
-        if (referenceViewController.supportedInterfaceOrientations & orientationMask)
-        {
-            [self updateViewForOrientation:orientation animated:!self.hidden];
-        }
-    }
-    else if ([referenceViewController shouldAutorotateToInterfaceOrientation:orientation]) {
         [self updateViewForOrientation:orientation animated:!self.hidden];
     }
+
 }
 /*
 - (void)updateViewForOrientation:(UIInterfaceOrientation)orientation animated:(BOOL)animated

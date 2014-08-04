@@ -18,7 +18,7 @@
 {
 	[super drawView];
 	_textField = [[UITextField alloc] initWithFrame:CGRectZero];
-	_textField.textAlignment = UITextAlignmentRight;
+	_textField.textAlignment = NSTextAlignmentRight;
 	_textField.delegate = self;
 	_textField.adjustsFontSizeToFitWidth = TRUE;
 	_textField.minimumFontSize = 12;
