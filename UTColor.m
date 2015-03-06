@@ -26,7 +26,7 @@
 // Skips any leading whitespace and ignores any trailing characters
 + (UIColor *)colorWithHexString:(NSString *)stringToConvert 
 {
-	NSScanner *scanner = [NSScanner scannerWithString:stringToConvert];
+	NSScanner *scanner = [NSScanner scannerWithString:[stringToConvert stringByReplacingOccurrencesOfString:@"#" withString:@""]];
 	unsigned hexNum;
 	if (![scanner scanHexInt:&hexNum]) return nil;
 	return [UTColor colorWithHex:hexNum];
