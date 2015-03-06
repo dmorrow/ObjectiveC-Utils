@@ -38,9 +38,9 @@
 - (id) initWithPList:(NSString *)path;
 - (void) parsePList;
 - (NSDictionary *) dataAtIndexPath:(NSIndexPath *)indexPath;
-- (NSDictionary *) groupAtIndex:(int)groupIndex;
+- (NSDictionary *) groupAtIndex:(NSInteger)groupIndex;
 - (NSArray *) groups;
-- (NSArray *) fieldsInGroup:(int)groupIndex;
+- (NSArray *) fieldsInGroup:(NSInteger)groupIndex;
 - (UIKeyboardType) keyboardFactory:(NSString*) keyboardType;
 - (UITextAutocapitalizationType) capitalizationFactory:(NSString*) capitalizationType;
 - (id) setDefaultValue:(NSDictionary*) dataModel data:(NSDictionary *) data;

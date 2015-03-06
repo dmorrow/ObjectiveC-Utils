@@ -12,14 +12,13 @@
 
 @interface UTTableViewMultiOptionCell : UTTableViewTextFieldCell <UIPickerViewDelegate, UIPickerViewDataSource>
 {
-	int _selectedIndex;
 	UIView* _pickerView;
 	BOOL _isOpen;
 }
 
-@property (nonatomic) int selectedIndex;
+@property (nonatomic) NSInteger selectedIndex;
 
-- (void) pickerWithDefault:(int)defaultRow;
+- (void) pickerWithDefault:(NSInteger)defaultRow;
 - (void) done:(id)sender;
 - (void) hidePicker;
 - (void) showPicker;

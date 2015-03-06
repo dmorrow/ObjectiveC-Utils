@@ -11,8 +11,6 @@
 
 @implementation UTTableViewMultiOptionCell
 
-@synthesize selectedIndex	=	_selectedIndex;
-
 - (void) drawView
 {
 	[super drawView];
@@ -31,7 +29,7 @@
 	}
 }
 
-- (void) setSelectedIndex:(int)idx
+- (void) setSelectedIndex:(NSInteger)idx
 {
 	if (_selectedIndex != idx)
 	{
@@ -74,7 +72,7 @@
 
 
 //creates the actual picker
-- (void)pickerWithDefault:(int)defaultRow
+- (void)pickerWithDefault:(NSInteger)defaultRow
 {
 	if (!_pickerView)
 	{

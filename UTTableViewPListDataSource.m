@@ -209,7 +209,7 @@
 	return [[self fieldsInGroup:indexPath.section] objectAtIndex:indexPath.row];
 }
 
-- (NSDictionary *) groupAtIndex:(int)groupIndex
+- (NSDictionary *) groupAtIndex:(NSInteger)groupIndex
 {
 	return [self.groups objectAtIndex:groupIndex];
 }
@@ -219,7 +219,7 @@
 	return [self.plistData objectForKey:@"Groups"];
 }
 
-- (NSArray *) fieldsInGroup:(int)groupIndex
+- (NSArray *) fieldsInGroup:(NSInteger)groupIndex
 {
 	return [[self groupAtIndex:groupIndex] objectForKey:@"Fields"];
 }
