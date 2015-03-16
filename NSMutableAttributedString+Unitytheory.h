@@ -11,11 +11,15 @@
  Attributed String options
 */
 
+- (void) setMultiple:(NSDictionary*)properties;
+- (void) setAttribute:(NSString *)name value:(id)value;
+
 @property (nonatomic) UIColor* backgroundColor;
 @property (nonatomic) CGFloat baselineOffset;
 @property (nonatomic) UIFont* font;
 @property (nonatomic) UIColor* color;
 @property (nonatomic) CGFloat kerning;
+@property (nonatomic) CGFloat photoshopKerning;
 @property (nonatomic) NSUInteger* ligature;
 @property (nonatomic) NSURL* link;
 @property (nonatomic) CGFloat strokeWidth;

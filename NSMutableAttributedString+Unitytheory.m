@@ -10,6 +10,21 @@
 
 @implementation NSMutableAttributedString(unitytheory)
 
+- (void) setMultiple:(NSDictionary *)properties
+{
+    for (NSString* key in properties)
+    {
+        NSAssert([self respondsToSelector:NSSelectorFromString(key)], @"trying to set nonexistant property: '%@'", key);
+        //[self setAttribute:key value:properties[key]];
+        [self setValue:properties[key] forKey:key];
+    }
+}
+
+- (void) setAttribute:(NSString *)name value:(id)value
+{
+    [self removeAttribute:name range:self.range];
+    [self addAttribute:name value:value range:self.range];
+}
 
 - (UIColor*) backgroundColor
 {
@@ -18,8 +33,7 @@
 
 - (void) setBackgroundColor:(UIColor *)backgroundColor
 {
-    [self removeAttribute:NSBackgroundColorAttributeName range:self.range];
-    [self addAttribute:NSBackgroundColorAttributeName value:backgroundColor range:self.range];
+    [self setAttribute:NSBackgroundColorAttributeName value:backgroundColor];
 }
 
 - (CGFloat) baselineOffset
@@ -34,14 +48,12 @@
 
 - (void) setFont:(UIFont *)font
 {
-    [self removeAttribute:NSFontAttributeName range:self.range];
-    [self addAttribute:NSFontAttributeName value:font range:self.range];
+    [self setAttribute:NSFontAttributeName value:font];
 }
 
 - (void) setBaselineOffset:(CGFloat)baselineOffset
 {
-    [self removeAttribute:NSBaselineOffsetAttributeName range:self.range];
-    [self addAttribute:NSBaselineOffsetAttributeName value:@(baselineOffset) range:self.range];
+    [self setAttribute:NSBaselineOffsetAttributeName value:@(baselineOffset)];
 }
 
 - (UIColor*) color
@@ -51,8 +63,7 @@
 
 - (void) setColor:(UIColor *)color
 {
-    [self removeAttribute:NSForegroundColorAttributeName range:self.range];
-    [self addAttribute:NSForegroundColorAttributeName value:color range:self.range];
+    [self setAttribute:NSForegroundColorAttributeName value:color];
 }
 
 - (CGFloat) kerning
@@ -62,8 +73,18 @@
 
 - (void) setKerning:(CGFloat)kerning
 {
-    [self removeAttribute:NSKernAttributeName range:self.range];
-    [self addAttribute:NSKernAttributeName value:@(kerning) range:self.range];
+    [self setAttribute:NSKernAttributeName value:@(kerning)];
+}
+
+- (CGFloat) photoshopKerning
+{
+    return self.kerning * 1000 / self.font.pointSize;
+}
+
+- (void) setPhotoshopKerning:(CGFloat)photoshopKerning
+{
+    CGFloat pointSize = self.font.pointSize;
+    self.kerning = photoshopKerning / 1000 * pointSize;
 }
 
 - (NSUInteger*) ligature
@@ -73,8 +94,7 @@
 
 - (void) setLigature:(NSUInteger *)ligature
 {
-    [self removeAttribute:NSLigatureAttributeName range:self.range];
-    [self addAttribute:NSLigatureAttributeName value:[NSNumber numberWithInt:ligature] range:self.range];
+    [self setAttribute:NSLigatureAttributeName value:[NSNumber numberWithInt:ligature]];
 }
 
 - (NSURL*) link
@@ -84,8 +104,7 @@
 
 - (void) setLink:(NSURL *)link
 {
-    [self removeAttribute:NSLinkAttributeName range:self.range];
-    [self addAttribute:NSLinkAttributeName value:link range:self.range];
+    [self setAttribute:NSLinkAttributeName value:link];
 }
 
 - (CGFloat) strokeWidth
@@ -95,8 +114,7 @@
 
 - (void) setStrokeWidth:(CGFloat)strokeWidth
 {
-    [self removeAttribute:NSStrokeWidthAttributeName range:self.range];
-    [self addAttribute:NSStrokeWidthAttributeName value:@(strokeWidth) range:self.range];
+    [self setAttribute:NSStrokeWidthAttributeName value:@(strokeWidth)];
 }
 
 - (UIColor*) strokeColor
@@ -106,8 +124,7 @@
 
 - (void) setStrokeColor:(UIColor *)strokeColor
 {
-    [self removeAttribute:NSStrokeColorAttributeName range:self.range];
-    [self addAttribute:NSStrokeColorAttributeName value:strokeColor range:self.range];
+    [self setAttribute:NSStrokeColorAttributeName value:strokeColor];
 }
 
 - (NSInteger*) superscript
@@ -117,8 +134,7 @@
 
 - (void) setSuperscript:(NSInteger *)superscript
 {
-    [self removeAttribute:(NSString*)kCTSuperscriptAttributeName range:self.range];
-    [self addAttribute:(NSString*)kCTSuperscriptAttributeName value:[NSNumber numberWithInt:superscript] range:self.range];
+    [self setAttribute:(NSString*)kCTSuperscriptAttributeName value:[NSNumber numberWithInt:superscript]];
 }
 
 - (UIColor*) underlineColor
@@ -128,8 +144,7 @@
 
 - (void) setUnderlineColor:(UIColor *)underlineColor
 {
-    [self removeAttribute:NSUnderlineColorAttributeName range:self.range];
-    [self addAttribute:NSUnderlineColorAttributeName value:underlineColor range:self.range];
+    [self setAttribute:NSUnderlineColorAttributeName value:underlineColor];
 }
 
 - (NSUnderlineStyle) underlineStyle
@@ -139,8 +154,7 @@
 
 - (void) setUnderlineStyle:(NSUnderlineStyle)underlineStyle
 {
-    [self removeAttribute:NSUnderlineStyleAttributeName range:self.range];
-    [self addAttribute:NSUnderlineStyleAttributeName value:@(underlineStyle) range:self.range];
+    [self setAttribute:NSUnderlineStyleAttributeName value:@(underlineStyle)];
 }
 
 - (CGFloat) lineSpacing
@@ -208,8 +222,7 @@
 
 - (void) setParagraphStyle:(NSParagraphStyle *)paragraphStyle
 {
-    [self removeAttribute:NSParagraphStyleAttributeName range:self.range];
-    [self addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:self.range];
+    [self setAttribute:NSParagraphStyleAttributeName value:paragraphStyle];
 }
 
 
