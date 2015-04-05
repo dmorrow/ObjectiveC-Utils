@@ -87,17 +87,15 @@ static UTOfflineCache *sharedInstance = nil;
 - (NSString *)pathToDataForURL:(NSURL *)url
 {
 	NSString *extension = [[url path] pathExtension];
-    NSString *path =   [[self storagePath] stringByAppendingPathComponent:[[[self class] keyForURL:url] stringByAppendingPathExtension:extension]];
-	return path;
+    NSString *name = [[self class] keyForURL:url];
+    if (extension.length) name = [name stringByAppendingPathExtension:extension];
+    return [[self storagePath] stringByAppendingPathComponent: name];
 }
 
 + (NSString *) keyForURL:(NSURL*)url
 {
     return [url.absoluteString md5HexDigest];
 }
-
-
-
 
 
 @end
