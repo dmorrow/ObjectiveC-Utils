@@ -42,9 +42,10 @@
 	return theImage;
 }
 
-+ (NSString*) path2x:(NSString*)path
++ (NSString*) path:(NSString*)path atScale:(NSUInteger)scale
 {
-    if ([path rangeOfString:@"@2x"].location != NSNotFound) return path;
+    NSString* scaleString = [NSString stringWithFormat:@"@%@x", @(scale)];
+    if ([path rangeOfString:scaleString].location != NSNotFound) return path;
     NSString* ipadLabel = @"";
     if ([path rangeOfString:@"~ipad"].location != NSNotFound)
     {
@@ -52,20 +53,36 @@
         ipadLabel = @"~ipad";
         path = [path stringByReplacingCharactersInRange:lastOccurance withString:@""];
     }
-	return [[path stringByDeletingLastPathComponent]
-			stringByAppendingPathComponent:[NSString stringWithFormat:@"%@@2x%@.%@", 
-											[[path lastPathComponent] stringByDeletingPathExtension],
+    return [[path stringByDeletingLastPathComponent]
+            stringByAppendingPathComponent:[NSString stringWithFormat:@"%@%@%@.%@",
+                                            [[path lastPathComponent] stringByDeletingPathExtension],
+                                            scaleString,
                                             ipadLabel,
-											[path pathExtension]]];
-	
+                                            [path pathExtension]]];
+}
+
++ (NSString*) path2x:(NSString*)path
+{
+    return [UTImage path:path atScale:2];
+}
+
++ (NSString*) path3x:(NSString*)path
+{
+    return [UTImage path:path atScale:3];
 }
 
 - (id)initWithContentsOfResolutionIndependentFile:(NSString *)path 
 {
-    if ( [[[UIDevice currentDevice] systemVersion] intValue] >= 4 && [[UIScreen mainScreen] scale] == 2.0 ) {
-        NSString *path2x = [UTImage path2x:path];	
-        if ( [[NSFileManager defaultManager] fileExistsAtPath:path2x] ) {
-            return [self initWithCGImage:[[UIImage imageWithData:[NSData dataWithContentsOfFile:path2x]] CGImage] scale:2.0 orientation:UIImageOrientationUp];
+    CGFloat scale = [UIScreen mainScreen].scale;
+    for (NSUInteger i = 3; i>=2; i--)
+    {
+        if (scale >= i)
+        {
+            NSString *adjustedPath = [UTImage path:path atScale:i];
+            if ( [[NSFileManager defaultManager] fileExistsAtPath:adjustedPath] )
+            {
+                return [self initWithCGImage:[[UIImage imageWithData:[NSData dataWithContentsOfFile:adjustedPath]] CGImage] scale:i orientation:UIImageOrientationUp];
+            }
         }
     }
 	
@@ -79,7 +96,7 @@
 
 + (UIImage *) circleWithRect:(CGRect)rect withFill:(UIColor*)fillColor
 {
-    CGSize size = CGSizeMake(rect.size.width+2*rect.origin.x, rect.size.height+2*rect.origin.y);
+    CGSize size = CGSizeMake(CGRectGetWidth(rect)+2*CGRectGetMinX(rect), CGRectGetHeight(rect)+2*CGRectGetMinY(rect));
     UIGraphicsBeginImageContextWithOptions(size, FALSE, 0);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextAddEllipseInRect(ctx, rect);

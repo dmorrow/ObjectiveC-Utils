@@ -19,7 +19,8 @@
 - (id)initWithContentsOfResolutionIndependentFile:(NSString *)path;
 + (UIImage*)imageWithContentsOfResolutionIndependentFile:(NSString *)path;
 + (NSString*) path2x:(NSString*)path;
-
++ (NSString*) path3x:(NSString*)path;
++ (NSString*) path:(NSString*)path atScale:(NSUInteger)scale;
 + (UIImage *) circleWithRect:(CGRect)rect withFill:(UIColor*)fillColor;
 
 @end
