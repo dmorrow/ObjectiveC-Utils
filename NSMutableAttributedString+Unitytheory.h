@@ -39,4 +39,5 @@
 @property (nonatomic) CGFloat lineSpacing;
 @property (nonatomic) CGFloat paragraphSpacing;
 @property (nonatomic) CGFloat lineHeightMultiple;
+@property (nonatomic) NSLineBreakMode lineBreakMode;
 @end

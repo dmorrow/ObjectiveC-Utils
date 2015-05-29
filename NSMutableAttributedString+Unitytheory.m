@@ -205,6 +205,18 @@
     self.paragraphStyle = paragraphStyle;
 }
 
+- (NSLineBreakMode) lineBreakMode
+{
+    return self.paragraphStyle.lineBreakMode;
+}
+
+- (void) setLineBreakMode:(NSLineBreakMode)lineBreakMode
+{
+    NSMutableParagraphStyle* paragraphStyle = [self.paragraphStyle mutableCopy];
+    paragraphStyle.lineBreakMode = lineBreakMode;
+    self.paragraphStyle = paragraphStyle;
+}
+
 - (NSRange) range
 {
     return NSMakeRange(0, self.length);
