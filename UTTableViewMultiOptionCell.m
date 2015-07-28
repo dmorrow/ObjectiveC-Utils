@@ -179,6 +179,7 @@
 - (BOOL) resignFirstResponder
 {
 	[self hidePicker];
+    [super resignFirstResponder];
 	return TRUE;
 }
 
