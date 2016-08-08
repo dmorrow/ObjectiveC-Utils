@@ -20,11 +20,11 @@
 @property (nonatomic) UIColor* color;
 @property (nonatomic) CGFloat kerning;
 @property (nonatomic) CGFloat photoshopKerning;
-@property (nonatomic) NSUInteger* ligature;
+@property (nonatomic) NSUInteger ligature;
 @property (nonatomic) NSURL* link;
 @property (nonatomic) CGFloat strokeWidth;
 @property (nonatomic) UIColor* strokeColor;
-@property (nonatomic) NSInteger* superscript;
+@property (nonatomic) NSInteger superscript;
 @property (nonatomic) UIColor* underlineColor;
 @property (nonatomic) NSUnderlineStyle underlineStyle;
 

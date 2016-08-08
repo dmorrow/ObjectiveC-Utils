@@ -87,14 +87,14 @@
     self.kerning = photoshopKerning / 1000 * pointSize;
 }
 
-- (NSUInteger*) ligature
+- (NSUInteger) ligature
 {
-    return [(NSNumber*)[self attribute:NSLigatureAttributeName atIndex:0 effectiveRange:nil] integerValue];
+    return [(NSNumber*)[self attribute:NSLigatureAttributeName atIndex:0 effectiveRange:nil] unsignedIntegerValue];
 }
 
-- (void) setLigature:(NSUInteger *)ligature
+- (void) setLigature:(NSUInteger)ligature
 {
-    [self setAttribute:NSLigatureAttributeName value:[NSNumber numberWithInt:ligature]];
+    [self setAttribute:NSLigatureAttributeName value:[NSNumber numberWithUnsignedInteger:ligature]];
 }
 
 - (NSURL*) link
@@ -127,14 +127,14 @@
     [self setAttribute:NSStrokeColorAttributeName value:strokeColor];
 }
 
-- (NSInteger*) superscript
+- (NSInteger) superscript
 {
     return [(NSNumber*)[self attribute:(NSString*)kCTSuperscriptAttributeName atIndex:0 effectiveRange:nil] integerValue];
 }
 
-- (void) setSuperscript:(NSInteger *)superscript
+- (void) setSuperscript:(NSInteger)superscript
 {
-    [self setAttribute:(NSString*)kCTSuperscriptAttributeName value:[NSNumber numberWithInt:superscript]];
+    [self setAttribute:(NSString*)kCTSuperscriptAttributeName value:[NSNumber numberWithInteger:superscript]];
 }
 
 - (UIColor*) underlineColor
